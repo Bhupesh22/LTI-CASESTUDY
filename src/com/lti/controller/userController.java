@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -34,7 +35,7 @@ public class userController extends HttpServlet {
 		String submit = request.getParameter("submit");
 		String filepath = "C:\\Users\\Bhupesh\\Desktop\\JSP Course\\LTI-WEB\\src\\com\\lti\\controller\\students.csv";
 		File file = new File(filepath);
-		
+		HashSet<String> hset = new HashSet<>();
 		
 		if(submit.equals("Insert")) {
 			
@@ -49,6 +50,7 @@ public class userController extends HttpServlet {
 			String stream = request.getParameter("stream");
 			
 			if(!file.exists()) {
+				
 				file.createNewFile();
 				FileWriter fw = new FileWriter(filepath, true);
 				fw.append("Student ID");
@@ -71,33 +73,56 @@ public class userController extends HttpServlet {
 				fw.append("\n");
 				fw.flush();
 				fw.close();
+			
+			}else {
+				
+				String line ="";
+				try {
+					
+					BufferedReader br = new BufferedReader(new FileReader(filepath));
+					while((line = br.readLine()) != null) {
+						String[] values = line.split(",");
+						hset.add(values[0]);
+					}
+					br.close();
+					
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				
 			}
 			
-			try{
+			if(!hset.contains(id)) {
+				try{
 				
-				FileWriter fw = new FileWriter(filepath, true);
-				fw.append(id);
-				fw.append(",");
-				fw.append(name);
-				fw.append(",");
-				fw.append(gender);
-				fw.append(",");
-				fw.append(date);
-				fw.append(",");
-				fw.append(city);
-				fw.append(",");
-				fw.append(state);
-				fw.append(",");
-				fw.append(email);
-				fw.append(",");
-				fw.append(qualification);
-				fw.append(",");
-				fw.append(stream);
-				fw.append("\n");
-				fw.flush();
-				fw.close();
-			}catch( Exception e) {
-				e.printStackTrace();
+					FileWriter fw = new FileWriter(filepath, true);
+					fw.append(id);
+					fw.append(",");
+					fw.append(name);
+					fw.append(",");
+					fw.append(gender);
+					fw.append(",");
+					fw.append(date);
+					fw.append(",");
+					fw.append(city);
+					fw.append(",");
+					fw.append(state);
+					fw.append(",");
+					fw.append(email);
+					fw.append(",");
+					fw.append(qualification);
+					fw.append(",");
+					fw.append(stream);
+					fw.append("\n");
+					fw.flush();
+					fw.close();
+					
+				}catch( Exception e) {
+					e.printStackTrace();
+				}
+			}else {
+				String error = "Student ID already exist !!";
+				request.setAttribute("message", error);
 			}
 			
 			request.getRequestDispatcher("index.jsp").forward(request, response);

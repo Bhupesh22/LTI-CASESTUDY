@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +16,18 @@
         <a class="btn btn-outline-dark" href="add-student.jsp" role="button">Add Student</a>
         <a class="btn btn-outline-dark" href="search-student.jsp" role="button">Search Student</a>
         <a class="btn btn-outline-dark" href="display-student.jsp" role="button">Display Students</a>
+        <div class="error">
+    	<%
+    		String message = (String)request.getAttribute("message");
+    		Optional<String> check = Optional.ofNullable(message);
+    		if(check.isPresent()){
+    	%>
+    		<p><h3> <%= message %> </h3></p>
+    	<%
+    		}
+    	%>
+    	</div>
     </div>
+    
 </body>
 </html>

@@ -31,3 +31,12 @@
 .container{
 	padding-bottom: 5%;
 }
+.error{
+	padding-top:5%;
+}
+p{
+	color:red;
+}
+h3{
+	color:red;
+}
