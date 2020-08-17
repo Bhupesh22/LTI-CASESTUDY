@@ -27,12 +27,14 @@
         </div>
         </div>
         <div class="row d-two justify-content-center">
-        <div class="container three">
+        <div class="container three ">
     	<%
     		String message = (String)request.getAttribute("message");
     		if(message != null){
     	%>
-    		<p><h3> <%= message %> </h3></p>
+    		<div class="row d-one justify-content-center">
+    			<p style="align:center"><h3 style="align:center"> <%= message %> </h3></p>
+    		</div>
     	<%
     		}else {
  
