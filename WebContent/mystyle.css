@@ -1,0 +1,33 @@
+.container.index{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.container.two{
+    width: 100%;
+    display: block;
+    padding-bottom: 10%;
+}
+.row.one{
+    padding-top: 10%;
+}
+.row.two{
+    padding-top: 5%;
+}
+.container.three{
+    width: 50%;
+}
+.row.d-one{
+    padding-top: 10%;
+}
+.row.d-two{
+    padding-top: 5%;
+}
+.button.submit{
+    text-align: center;
+}
+.container{
+	padding-bottom: 5%;
+}
