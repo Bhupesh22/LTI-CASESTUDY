@@ -1,3 +1,4 @@
 Student ID,Name,Gender,Date,City,State,E-mail,Qualification,Stream
-16101,Chetana,Male,2020-08-15,Kalyan,Maha,chetzamey@gmail.com,Duper tak,None
-16102,Bhupesh,Male,2020-08-06,Mumbai,Maharashtra,bhupeshp286@gmail.com,B.E,Computer
+1,Raj,Male,1995-10-10,Mumbai,Maharashtra,raj@gmail.com,B.E,Electronics
+2,Priyanka,Female,1995-10-20,Pune,Maharashtra,priyanka@gmail.com,B.Tech,IT
+3,Bhupesh,Male,1998-03-22,Mumbai,Maharashtra,bhupeshp286@gmail.com,B.E,Computer
