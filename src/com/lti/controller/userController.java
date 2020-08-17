@@ -76,19 +76,7 @@ public class userController extends HttpServlet {
 			
 			}else {
 				
-				String line ="";
-				try {
-					
-					BufferedReader br = new BufferedReader(new FileReader(filepath));
-					while((line = br.readLine()) != null) {
-						String[] values = line.split(",");
-						hset.add(values[0]);
-					}
-					br.close();
-					
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
+				hset = populate(hset, filepath);
 				
 			}
 			
@@ -132,24 +120,32 @@ public class userController extends HttpServlet {
 			
 			String id = request.getParameter("sid");
 			String line = "";
-			
 			List<String> row = new ArrayList<>();
 			
-			try {
-				BufferedReader br = new BufferedReader(new FileReader(filepath));
-				while((line = br.readLine()) != null) {
-					String[] values = line.split(",");
-					if(values[0].equals(id)) {
-						for(String f : values) {
-							row.add(String.valueOf(f));
+			hset = populate(hset, filepath);
+			
+			
+			if(!hset.contains(id)) {
+				String error = "Student ID not found !!";
+				request.setAttribute("message", error);
+			}
+			else {
+				
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(filepath));
+					while((line = br.readLine()) != null) {
+						String[] values = line.split(",");
+						if(values[0].equals(id)) {
+							for(String f : values) {
+								row.add(String.valueOf(f));
+							}
 						}
 					}
+					br.close();
+				}catch(Exception e) {
+					e.printStackTrace();
 				}
-				br.close();
-			}catch(Exception e) {
-				e.printStackTrace();
 			}
-			
 			
 			request.setAttribute("studentList", row);
 			request.getRequestDispatcher("search-student.jsp").forward(request, response);
@@ -168,12 +164,10 @@ public class userController extends HttpServlet {
 					String[] values = line.split(",");
 					for(String f : values) {
 						rows.add(String.valueOf(f));
-						out.println(rows);
 					}
 					details.add(new ArrayList<>(rows));
 					rows.clear();
 				}
-				out.println(details);
 				br.close();
 			}catch (Exception e){
 				e.printStackTrace();
@@ -182,6 +176,23 @@ public class userController extends HttpServlet {
 			request.setAttribute("allstudents", details);
 			request.getRequestDispatcher("display-student.jsp").forward(request, response);
 		}
+	}
+	
+	public static HashSet<String> populate (HashSet<String> hset, String filepath){
+		String line ="";
+		try {
+			
+			BufferedReader br = new BufferedReader(new FileReader(filepath));
+			while((line = br.readLine()) != null) {
+				String[] values = line.split(",");
+				hset.add(values[0]);
+			}
+			br.close();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return hset;
 	}
 
 }

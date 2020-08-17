@@ -28,7 +28,14 @@
         </div>
         <div class="row d-two justify-content-center">
         <div class="container three">
-        	<%
+    	<%
+    		String message = (String)request.getAttribute("message");
+    		if(message != null){
+    	%>
+    		<p><h3> <%= message %> </h3></p>
+    	<%
+    		}else {
+ 
     List<String> result = (List<String>) request.getAttribute("studentList");
     if(result != null){
     %>
@@ -75,6 +82,7 @@
     	</tr>
     <%
     		}
+    	}
     }
     %>
     </table>
